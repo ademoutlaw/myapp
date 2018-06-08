@@ -48,5 +48,48 @@ export class UserProvider {
   getCurrentUser(){
     return this.user;
   }
+  singup(user:User, password){
+    return new Promise((resolve, reject)=>{
+      this.auth.auth.createUserWithEmailAndPassword(user.email, password)
+      .then(()=>{
+        this.db.list('users').update(this.auth.auth.currentUser.uid,user)
+          .then(()=>resolve())
+          .catch(err=>{
+            reject(err);
+          });
+      })
+      .catch(err=>{
+        reject(err);
+      });
+    })
+  }
+  getAllUsers(){
+    return this.db.list('users').snapshotChanges().map(actions=>{
+      console.log(actions);
+      return actions.map(action=>{
+        const data = action.payload.val();
+        data.uid = action.payload.key;
+        return data;
+      });
+    });
+  }
+  getFriends(){
+    return this.db.list(`friends/${this.user.uid}`).snapshotChanges().map(actions=>{
+      console.log(actions);
+      return actions.map(action=>{
+        const data = action.payload.val();
+        data.uid = action.payload.key;
+        return data;
+      });
+    });
+  }
+  addFriend(friend:User){
+    return this.db.list(`friends/${this.user.uid}`)
+    .update(friend.uid,{firstName:friend.firstName, lastName:friend.lastName});
+  }
+  removeFriend(friend){
+    return this.db.list(`friends/${this.user.uid}/${friend.uid}`).remove();
+
+  }
 
 }

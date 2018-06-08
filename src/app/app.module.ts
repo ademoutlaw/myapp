@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
 
 import { UserProvider } from '../providers/user/user';
 import { LoginPage } from '../pages/login/login';
+import { SingupPage } from '../pages/singup/singup';
 
 const config = {
   apiKey: "AIzaSyCzVhpaEtjnl7CN6A5WqDe7f5yU324UWmk",
@@ -35,6 +36,7 @@ const config = {
     ContactPage,
     HomePage,
     TabsPage,
+    SingupPage,
     LoginPage
   ],
   imports: [
@@ -52,6 +54,7 @@ const config = {
     ContactPage,
     HomePage,
     TabsPage,
+    SingupPage,
     LoginPage
   ],
   providers: [

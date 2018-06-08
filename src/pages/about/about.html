@@ -7,5 +7,8 @@
 </ion-header>
 
 <ion-content padding>
-
+  <h2> hello {{me?.firstName+" "+me?.lastName}}</h2>
+  <div  *ngFor="let user of users | async">
+    <div class="user" (click)="addFriend(user)" *ngIf="user.uid!==me.uid">{{user.firstName}} {{user.lastName}}</div>
+  </div>
 </ion-content>

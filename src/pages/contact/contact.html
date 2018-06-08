@@ -6,12 +6,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
-</ion-content>
+<ion-content padding>
+    <h2> hello {{me.firstName+" "+me.lastName}}</h2>
+    <div *ngIf="(friends | async)?.length==0;else friendlist">no friends found.</div>
+    <ng-template #friendlist>      
+      <div  *ngFor="let friend of friends | async">
+        <div class="user" (click)="removeFriend(friend)" *ngIf="friend.uid!==me.uid">{{friend.firstName}} {{friend.lastName}}</div>
+      </div>
+    </ng-template>
+  </ion-content>

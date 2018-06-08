@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import { SingupPage } from '../singup/singup';
 
 /**
  * Generated class for the LoginPage page.
@@ -31,6 +32,8 @@ export class LoginPage {
       console.log(err);
     })
   }
-  
+  singup(){
+    this.navCtrl.setRoot(SingupPage);
+  }
 
 }
